@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  llm-advisor:
+    build: .
+    env_file:
+      - secrets.env
+    volumes:
+      - "./code:/app/code"
+      - "./data:/app/data"
+    ports:
+      - 8888:8888
+      - 7860:7860

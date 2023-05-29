@@ -1,0 +1,11 @@
+openai
+langchain
+pypdf2
+chromadb
+tiktoken
+
+unstructured
+tabulate
+
+jupyterlab
+gradio
