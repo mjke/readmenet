@@ -12,19 +12,19 @@ COPY requirements.txt /app/
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
-# for gdrive integration
-#RUN pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+# # for gdrive integration
+# RUN pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 # for gradio compatibility with docker port-forwarding
 ARG GRADIO_SERVER_NAME=0.0.0.0
 
-# for jupyter notebook (dev use)
-# Add Tini. Tini operates as a process subreaper for jupyter. This prevents kernel crashes.
-FROM dependencies AS jupyter
-RUN apt-get install tini
-RUN chmod +x /usr/bin/tini
-ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["jupyter", "server", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+# # for jupyter notebook (dev use)
+# # Add Tini. Tini operates as a process subreaper for jupyter. This prevents kernel crashes.
+# FROM dependencies AS jupyter
+# RUN apt-get install tini
+# RUN chmod +x /usr/bin/tini
+# ENTRYPOINT ["/usr/bin/tini", "--"]
+# CMD ["jupyter", "server", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
 
-# # for gradio (static use)
-# CMD ["python", "code/webapp.py"]
+# for gradio (normal use)
+CMD ["python", "code/webapp.py"]
