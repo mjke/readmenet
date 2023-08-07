@@ -6,7 +6,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
-from langchain.document_loaders import DirectoryLoader, UnstructuredWordDocumentLoader
+from langchain.document_loaders import DirectoryLoader
 from langchain.chains import RetrievalQA
 
 # conversation memory
@@ -21,6 +21,7 @@ import gradio as gr
 
 HAS_MEMORY = False
 
+OPEN_AI_MODEL_NAME = "gpt-4" # or "gpt-3.5-turbo"
 
 DIR_DATA = '/app/data'
 DIR_DATA_DOCS = f'{DIR_DATA}/docs'
@@ -30,7 +31,7 @@ CHUNK_SIZE = 4000
 CHUNK_OVERLAP = 0
 
 _LANGCHAIN_COLLECTION = 'langchain'
-SEARCH_K = 3
+SEARCH_K = 3 # for gpt-3.5-turbo
 
 CHAIN_TYPE = 'stuff' # https://docs.langchain.com/docs/components/chains/index_related_chains
 VERBOSE = True
@@ -105,7 +106,7 @@ def load_chain(db = None) -> None:
 
     llm = ChatOpenAI(
         temperature=0,
-        model_name="gpt-3.5-turbo")
+        model_name=OPEN_AI_MODEL_NAME)
     
     global qa_chain
     if HAS_MEMORY:
@@ -136,9 +137,7 @@ def load_chain(db = None) -> None:
     
 
 def load_data_directory(data_path:str = DIR_DATA) -> tuple:
-    loader = DirectoryLoader(data_path, glob="*.docx", 
-                            use_multithreading=True,
-                            loader_cls=UnstructuredWordDocumentLoader)
+    loader = DirectoryLoader(data_path, glob="*", use_multithreading=True)
     n_newdocs, n_sources = safe_load_vectorstore(loader.load())
     return \
         f"Loaded {n_newdocs} new. vectorDB contains {n_sources} total.", \

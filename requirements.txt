@@ -4,7 +4,7 @@ pypdf2
 chromadb
 tiktoken
 
-unstructured
+unstructured[all-docs]
 tabulate
 
 jupyterlab

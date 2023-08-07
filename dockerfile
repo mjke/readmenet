@@ -1,9 +1,14 @@
-FROM python:3.11.3-slim-bullseye AS builder
+FROM python:slim-bookworm AS builder
 RUN apt update -y
 
 # for hnwslib (a chromdb dep): https://github.com/pypa/packaging-problems/issues/648
 ARG HNSWLIB_NO_NATIVE=1
 RUN apt-get install -y curl build-essential cmake libboost-all-dev git
+
+# for unstructured: 
+# https://python.langchain.com/docs/modules/data_connection/document_loaders/file_directory
+# https://github.com/Unstructured-IO/unstructured/blob/main/docs/source/installing.rst
+RUN apt-get install -y libmagic-dev poppler-utils tesseract-ocr pandoc
 
 FROM builder AS dependencies
 WORKDIR /app
