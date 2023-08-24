@@ -21,7 +21,7 @@ import gradio as gr
 
 HAS_MEMORY = False
 
-OPEN_AI_MODEL_NAME = "gpt-4" # or "gpt-3.5-turbo"
+OPEN_AI_MODEL_NAME = "gpt-3.5-turbo" # or "gpt-4"
 
 DIR_DATA = '/app/data'
 DIR_DATA_DOCS = f'{DIR_DATA}/docs'
