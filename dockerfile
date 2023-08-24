@@ -10,6 +10,9 @@ RUN apt-get install -y curl build-essential cmake libboost-all-dev git
 # https://github.com/Unstructured-IO/unstructured/blob/main/docs/source/installing.rst
 RUN apt-get install -y libmagic-dev poppler-utils tesseract-ocr pandoc
 
+# rust for safetensors, itself a dependency
+RUN apt-get install -y rustc
+
 FROM builder AS dependencies
 WORKDIR /app
 COPY requirements.txt /app/
