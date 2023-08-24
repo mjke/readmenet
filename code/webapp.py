@@ -159,7 +159,7 @@ def run_query(query:str, chat_history) -> tuple:
 
 
 with gr.Blocks() as demo:
-    gr.Markdown("# LLM ADVISOR")
+    gr.Markdown("# READMENET")
     with gr.Tab("Chat"):
         gr.Markdown(f"Chat memory is{' **NOT**' if not HAS_MEMORY else ''} active")
         chatbot = gr.Chatbot()
