@@ -8,7 +8,7 @@ RUN apt-get install -y curl build-essential cmake libboost-all-dev git
 # for unstructured: 
 # https://python.langchain.com/docs/modules/data_connection/document_loaders/file_directory
 # https://github.com/Unstructured-IO/unstructured/blob/main/docs/source/installing.rst
-RUN apt-get install -y libmagic-dev poppler-utils tesseract-ocr pandoc
+RUN apt-get install -y libmagic-dev poppler-utils tesseract-ocr pandoc libgl1-mesa-glx
 
 # rust for safetensors, itself a dependency
 RUN apt-get install -y rustc
